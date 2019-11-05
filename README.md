@@ -6,6 +6,8 @@
 3. If you want add some Code to project, please create new branch and make commits in this branch.
 4. If possible name your branches as your login.
 
+Thank you for attention:) 
+
 ## First step - Introduction
 The project will be implemented by 5 people. 
 WWW application using VUE.JS and GO-lang.  
