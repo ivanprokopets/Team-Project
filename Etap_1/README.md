@@ -13,3 +13,6 @@ I tak dalej
 PS: proszę zamiast ... wpisać dalej dokładne produkty
 
 Deadline: 07.12.2019 maks 08.12.2019
+
+
+VladStarostenko: Голосую за варианты 1 и 6. В плане что по отдельности, либо то, либо то, чтобы не мешать все в кучу.
