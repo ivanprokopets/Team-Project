@@ -14,3 +14,6 @@ WWW application using VUE.JS and GO-lang.
 
 Please write your suggestions here:
 * 1.Tetris
+
+
+Jutor zaczynamy!!!!!!!!!!!!!!!
