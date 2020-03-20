@@ -1,4 +1,4 @@
-# Team_Project
+# Team_Project Generator Receptur
 
 ## Rules: 
 1. First of all respect each of the team.
@@ -7,13 +7,11 @@
 4. If possible name your branches as your login.
 
 ## First step - Introduction
-The project will be implemented by 5 people. 
-WWW application using VUE.JS and GO-lang.  
+The project will be implemented by 4 people. 
+Aplikacja WWW z wykorzystaniem REACT oraz GO-lang 
 
 ### Project topic:
-
-Please write your suggestions here:
-* 1.Tetris
-
-
-Jutor zaczynamy!!!!!!!!!!!!!!!
+ Aplikacja WWW z wykorzystaniem REACT oraz GO-lang
+ 
+ 
+ 
