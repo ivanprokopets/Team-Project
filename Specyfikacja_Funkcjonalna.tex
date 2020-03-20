@@ -1,0 +1,167 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel} 
+\usepackage[utf8]{inputenc} 
+\usepackage{indentfirst}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{pdfpages}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{latexsym}
+\pagestyle{fancy} 
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+\pagestyle{fancy} 
+\pagestyle{fancy} 
+\newcommand{\mainmatter}{\clearpage \cfoot{\thepage\ of \pageref{LastPage}}
+\pagenumbering{arabic}}
+
+\begin{document}
+	\begin{titlepage}
+		
+		\begin{center}
+			\Large Politechnika Warszwska\\ 
+			\Large Wydział: \large Elektryczny\\
+			\Large Kierunek: \large Informatyka Stosowana\\
+			\Large Specjalność:	 \large Inżynieria Oprogramowania\\
+    	\vspace{5cm}
+    		\Large\textit{\textbf{SPECYFIKACJA FUNKCJONALNA 
+    		\\Aplikacja WWW z wykorzystaniem REACT oraz GO-lang}}\\ 
+		\vspace{3cm}
+		\end{center} 
+
+		\hfill\begin{minipage}{0.65\textwidth}
+			\Large Wykonali:\newline
+				1. Agratina Oleksandr, 287571\newline
+				2. Manevych Andrii, 294867\newline
+				3. Prakapets Ivan, 295139\newline
+				4. Starastsenka Uladzislau, 294534
+		\vspace{\baselineskip}
+		\end{minipage}
+		
+		
+		\hfill\begin{minipage}{0.65\textwidth}
+			\Large Opiekun naukowy:\newline
+		 		dr inż. Jarosław Wilk
+		\end{minipage}
+		
+		\hfill\begin{minipage}{0.5\textwidth}
+		\vspace{1cm}
+			\Large Data: 20.03.2020
+			\vspace{\baselineskip}
+		\end{minipage}
+
+	\end{titlepage}
+\newpage
+\mainmatter
+\setlength{\headheight}{15pt}
+\doublespacing
+\tableofcontents
+\newpage
+
+	\section{Opis Ogólny}
+		\subsection{Nazwa programu} 
+			\textbf{Nazwa programu:} \texttt{wyszukiwanie receptów wobiec produktów, które masz w obecnej chwili} LUB Generator receptur.\newline
+			PODOBNA APLIKACJA DEMO VERSION: \href{http://recepty-po-ingredientam.ru/}{DEMO}\newline
+			PODOBNA APLIKACJA FULL: \href{https://mnevkusno.ru/}{FULL}
+			%gra$\_$w$\_$zycie.}
+			
+		\subsection{Poruszany problem}
+			\hspace*{1cm} W czasy teraźniejsze potrzebujemy aplikacji, która będzie umożliwiać znaleźć recept na podstawie wybranych prodóktów, które posiadasz. 
+			Ta aplikacja będzie przydatna dla wielu studetów ( które nie mają za dużo  prodóktów dla przygotowywania jedzenia ). Analogicznie dla dużej ilości ludzi, bo w czasy dzisiejsze większość restauracji jest zamknięta. (KORONAWIRUS:)) 
+			
+Usługa wyszukiwania receptur według składników pomoże ci!
+\newpage
+	\section{Opis funkcjonalności}
+		\subsection{Możliwości programu}
+			\hspace*{1cm} Program będzie zawierał następujące możliwości:
+		
+ 		\begin{enumerate}
+ 		    \item Pasek dla wyszukiwania receptur(wpisywania produtów).
+ 		    \item Było by fajnie, żeby kiedy wpisujesz na przykład mil...(podpowiada z listy znak po znaku)
+ 		    \item Lista receptur.
+ 			\item Użytkownik ma możliwość wyboru kategorij 
+ 			\item Po wyszukiwaniu receptur sortowanie według opinij innych użytkowników?????
+ 			\item Sprawdzanie poprawności podanych argumentów, danych.
+ 			\item Obsługa różnych błędnych danych.
+ 			\item Ulubione receptury ( nie wiem czy potrzebne) 
+ 			\item Użytkownik ma możliwość wyboru kuchni(arabska,polska???? nie czy potrzebne).
+  			\item Zapisanie stanów wyboru(historia) pewnego użytkownika ( po zalogowaniu(FULL VERSION) DOPOKI NIE PATRZEC)
+ 		\end{enumerate}
+ 		\subsection{Filtr wyszukiwania}
+ 		\subsubsection{Kategoria receptur}
+ 		\begin{enumerate}
+ 		    \item Filt dotyczące wyboru poprzez użytkownika kategorij receptur
+ 		    \begin{itemize}
+ 		        \item śniadanie
+ 		        \item Danie główne (drugie)
+ 		        \item napój
+ 		        \item sałatka
+ 		        \item desery
+ 		        \item zupa
+ 		        \item inne
+ 		    \end{itemize}
+ 		\end{enumerate}
+ 		\subsection{Co zawiera receptura?}
+ 		Recept zawiera następujące dane: 
+ 		\begin{itemize}
+ 		    \item Nazwa receptu
+ 		    \item Ingridients (product) 
+ 		    \item Przykładowy czas przygotowywania
+ 		    \item Krok po kroku, co trzeba robić, żeby ugotować danie (Sposób przygotowania)
+ 		    \item ID RECEPTU
+ 		    \item Opinij , zwiazdy, ranking. 
+ 		\end{itemize}
+ 		\subsection{Jak korzystać się z APLIKACJI?}
+ 			\hspace*{1cm} Program ma interfejs graficzny. Z tego powodu korzystanie jest łatwe. Co musisz zrobić, żeby korzystać z aplikacji? \newline
+            Kroki:
+            \begin{enumerate}
+                \item Wejdź do strony HTTP/HTTPS
+                \item Wpisz produkty, które posiadasz  do paski wyszukiwania
+                \item !!!!OPCJONALNIE!!! wybierz kategorii (PO DEFAULTU bedze wszystkie kategorii)
+                \item Nacisknij przycisk znajdz
+                \item Będzie pokazana lista receptur, które posiadają wpisane produkty w punkcie 2
+                \item Wybierz recept, którym zainteresowałeś
+                \item Przejście do następnej strony z jednym receptem
+                \item Wykonywaj polecenia w recepcie
+                \item SMACZNEGO!!!!
+                \item Wyjdz ze strony lub ponów kroki 2-8
+            \end{enumerate}
+\newpage
+	\section{Format danych i struktura katalogów} 
+		\subsection{Struktura katalogów}
+			\hspace*{1cm} Aplikacja będzie zawierała kilka katalogów.
+			Katalog głowny GeneracjaReceptur.
+			Podkatalog backend będzie zawierał pliki źródłow. Podkatalog \texttt{''frondend''} będzie zawierał pliki \texttt{*.css} oraz \texttt{*.html} oraz .js. NIE JESTEM PEWNY 
+		
+		\subsection{Dane wejściowe}
+			\hspace*{1cm} Aplikacja WWW otrzymuje dane wejściowe (wpisane produkty) poprzez użytkownika. 
+		
+		\subsection{Dane wyjściowe}
+			\hspace*{1cm} W wyniku wpisania produktó na WWW stronie, zostaną  wygenerowane receptury dań zawieracjące opis, nazwa, czas i tak dalej.
+\newpage
+	\section{Obsługa sytuacji błędnych}
+		\hspace{1cm} Program będzie obsługiwał błędne dane z odpowiednimi komunikatami:
+		\renewcommand{\labelitemi}{$\ast$}
+		
+		\begin{itemize}
+			\item \textit{Niepoprawny wpisany produkt. Spróbuj ponownie}
+ 			\item \textit{Nie wybrana żadna kategoria dań}
+ 			\item \textit{System nie znalazł receptur, które zawierają wpisane produkty. Spróbuj wpisać mniej}
+ 			\item \textit{Cos jescze chyba mozna dopisac}
+ 			\item \textit{Nie wolno wpisywac cyfr, TYLKO Litery}
+		\end{itemize}
+	\section{Testowanie}
+		\hspace{1cm} DEMO VERSION 
+\label{LastPage}~
+\label{LastPageOfBackMatter}~		
+\end{document}
