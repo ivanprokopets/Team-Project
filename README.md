@@ -33,3 +33,5 @@ Anyone with this link can edit this project
 https://www.overleaf.com/9658271699mhhwbnfwtjkb  
 Anyone with this link can view this project  
 https://www.overleaf.com/read/bpdrdcyqbkjm
+
+JEZELI NIC NIE DZIALA: to zaloz konta w https://www.overleaf.com/ i skopiuj kod texa do projektu i masz szczescie)
