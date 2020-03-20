@@ -14,4 +14,8 @@ Aplikacja WWW z wykorzystaniem REACT oraz GO-lang
  Aplikacja WWW z wykorzystaniem REACT oraz GO-lang
  
  
+ Załączyłęm Specyfikację Funkcjonalną( wersja pdf oraz do zmina .tex)   
  
+ Latwy online sposób wczytywania .tex ( Sam robilem poprez ta strone)  
+ 
+https://www.overleaf.com/
