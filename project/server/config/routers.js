@@ -13,12 +13,12 @@ module.exports = app => {
   app.delete('/product/:id', middleware, product.remove);
  
   //recipe
-  app.get('/recipe', recipe.getAll);
-  app.post('/recipe/filter', recipe.filterRecipes);
+  app.get('/recipe',middleware, recipe.getAll);
+  app.post('/recipe/filter',middleware, recipe.filterRecipes);
   app.get('/recipe/:id', middleware, recipe.getRecipe);
-  app.post('/recipe', recipe.create);
+  app.post('/recipe',middleware, recipe.create);
   app.put('/recipe/:id', middleware, recipe.update);
-  app.delete('/recipe/:id', recipe.remove);
+  app.delete('/recipe/:id',middleware, recipe.remove);
 
   //user
   app.get('/user/:id', middleware, user.getUser);
