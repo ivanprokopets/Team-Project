@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #CEE5D7;
+}
+
+.title {
+  width: 20px;
+}
+
+.searchBar {
+  
+  
+  backgrund-color: grey;
+  color: black;
+}
+
+.loginBlock {
+  float: right;
+}
+
+.loginBlock a {
+  color: white;
+}
