@@ -4,6 +4,7 @@ import RecipeListContainer from './containers/app/recipeList/RecipeListContainer
 import { Provider} from "react-redux";
 import store from './store';
 import HeaderContainer from "./containers/app/header/HeaderContainer";
+import FooterContainer from './containers/app/footer/FooterContainer';
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
     <div className="App">
       <HeaderContainer />
       <RecipeListContainer />
+      <FooterContainer />
     </div>
-     </Provider>
+    </Provider>
   );
 }
 

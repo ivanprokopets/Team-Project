@@ -5,7 +5,7 @@ const Footer = () => {
 
   return(
     <footer className={styles.header}>
-      <h6 className="styles.title">Generator receptur</h6>
+      <h6 className="styles.title">Nasze info</h6>
     </footer>
   );
 }
