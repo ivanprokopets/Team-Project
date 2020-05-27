@@ -6,27 +6,9 @@ const instance = axios.create({
 
 });
 
-instance.defaults.headers['Csrf-Token'] = 'nocheck';
-
-instance.interceptors.request.use(
-  (config) => {
-    config.withCredentials = true;
-    config.headers['Csrf-Token'] = 'nocheck';
-    config.headers['Content-Type'] = 'application/json';
-    config.headers['Accept'] = 'application/json';
-    config.headers['Access-Control-Allow-Origin'] = '*';
-    config.headers['Access-Control-Allow-Methods'] = 'POST';
-    config.headers['Access-Control-Allow-Headers'] = 'Content-Type';
-    config.headers['Origin'] = 'http://localhost:3000';
-
-    return config;
-
-  },
-  
-  (error) => Promise.reject(error)
-)
 const headers={
-    Authorization: `Bearer${localStorage.getItem('accessToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    'content-type': 'application/json',
 }
 export const recipeAPI = { 
     getRecipes() {

@@ -2,32 +2,31 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { compose } from 'redux';
 
-import {  requestFilterRecipe } from '../../../store/appReducer';
+import {  requestRegister } from '../../../store/authReducer';
 import { getRecipes } from '../../../store/selectors';
-import { Recipe } from '../../../types/types';
 import { AppStateType } from '../../../store';
-import Header from './Header';
+import Register from './Register';
 
 
 interface MapStatePropsType  {
 };
 
 interface MapDispatchPropsType  {
-    requestFilterRecipe: (ingredients:Array<string>) => void;
+  requestRegister: (name:string,email:string,password:string) => void;
 };
 
 interface OwnPropsType  {};
 
 type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
 
-class HeaderContainer extends React.Component<PropsType> {
+class RegisterContainer extends React.Component<PropsType> {
 
 
   render() {
 
     return (
       <>
-       <Header requestFilterRecipe={this.props.requestFilterRecipe}/>
+       <Register requestRegister={this.props.requestRegister}/>
       </>
     );
   }
@@ -40,5 +39,5 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 };
 
 export default compose(
-    connect<MapStatePropsType,MapDispatchPropsType,OwnPropsType,AppStateType>(mapStateToProps,{requestFilterRecipe})
-(HeaderContainer))
+    connect<MapStatePropsType,MapDispatchPropsType,OwnPropsType,AppStateType>(mapStateToProps,{requestRegister})
+(RegisterContainer))

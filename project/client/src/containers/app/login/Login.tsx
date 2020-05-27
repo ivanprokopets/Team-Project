@@ -15,7 +15,7 @@ const Login: FC<PropsType> = ({requestSignIn}) => {
   const [password,setPassword]=useState('123123');
   return(
     <div className={styles.mainContainer}>
-      <div onSubmit={logIn} className="search-form">
+      <div  className="search-form">
         <input className="login" type="text" value={email} onChange={(event)=>setEmail(event.target.value)}/>
         <input className="password" type="text"  value={password} onChange={(event)=>setPassword(event.target.value)}/>  
       </div>

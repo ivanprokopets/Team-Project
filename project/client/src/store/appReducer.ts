@@ -106,15 +106,6 @@ type GetStateType = () => AppStateType;
 type DispatchType = Dispatch<ActionsTypes>;
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
 
-// export const requestGetRecipes = ():ThunkType => {
-//   return (dispatch, getState) => {
-//    recipeAPI.getRecipes().then(res=>{
-//     console.log(res.data);
-//     return dispatch(setRecipes(res.data));
-//    })
-//    return dispatch(
-//   };
-// };
 
 export const requestGetRecipes = (): ThunkType => {
   return async (dispatch, getState) => {

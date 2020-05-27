@@ -1,24 +1,23 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styles from './header-component.module.css';
 
-const Header = () => {
+const Header = ({requestFilterRecipe}:{requestFilterRecipe:(ingredients:Array<string>)=>void}) => {
+  const [searchText,setSearchText]=useState('');
 
-  const getSearch = (e: any) => {
-    e.preventDefault();
-    // setQuery(search)
-    // setSearch('');
+  const onSearchSubmit = (e: any) => {
+    requestFilterRecipe(searchText.split(','));
   }
-
+ 
   return(
     <header className={styles.header}>
       <h1 className="styles.title">Generator receptur</h1>
-      <form onSubmit={getSearch}
-        className="search-form">
-        <input className="search-bar" type="text"/>
-        <button className="search-button" type="submit">
-            Search
+      <div className="search-form">
+        <input className="login" type="text" value={searchText} onChange={(event)=>setSearchText(event.target.value)}/>
+      </div>
+      <button className="search-button" onClick={onSearchSubmit}>
+      Search
         </button>
-      </form>
+  
     </header>
   );
 }
