@@ -27,7 +27,7 @@ const filterRecipes=(req,res)=>{
     Recipe.find()
     .exec()
     .then(recipes => {
-      const filteredRecipes = recipes.filter(recipe=>_.intersection(recipe.products,req.body.products).length === req.body.products.length)
+      const filteredRecipes = recipes.filter(recipe=>_.intersection(recipe.ingredients,req.body.ingredients).length === req.body.ingredients.length)
       res.json(filteredRecipes);
     })
     .catch(err => {

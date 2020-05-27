@@ -24,6 +24,7 @@ const updateTokens = userId => {
 
 const signIn = (req, res) => {
   const { email, password } = req.body;
+  res.set('Access-Control-Allow-Origin', '*');
   User.findOne({ email })
     .exec()
     .then(user => {

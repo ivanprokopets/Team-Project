@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { compose } from 'redux';
 
-import { requestSetRecipe, requestGetRecipes } from '../../../store/appReducer';
+import {  requestGetRecipes } from '../../../store/appReducer';
 import RecipeList from '.';
 import { getRecipes } from '../../../store/selectors';
 import { Recipe } from '../../../types/types';
@@ -14,7 +14,6 @@ interface MapStatePropsType  {
 };
 
 interface MapDispatchPropsType  {
-  requestSetRecipe: (recipe: Recipe) => void;
   requestGetRecipes: () => void;
 };
 
@@ -24,15 +23,16 @@ type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
 
 class RecipeListContainer extends React.Component<PropsType> {
   componentDidMount() {
-    //when will be backend
-    //this.props.requestGetRecipes();
+    this.props.requestGetRecipes();
+  
   }
 
   render() {
-    const { recipes, requestSetRecipe } = this.props;
+    const { recipes } = this.props;
+    console.log(recipes);
     return (
       <>
-        <RecipeList recipes={recipes} requestSetRecipe={requestSetRecipe} />
+        <RecipeList recipes={recipes} />
       </>
     );
   }
@@ -45,5 +45,5 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 };
 
 export default compose(
-    connect<MapStatePropsType,MapDispatchPropsType,OwnPropsType,AppStateType>(mapStateToProps,{requestGetRecipes,requestSetRecipe})
+    connect<MapStatePropsType,MapDispatchPropsType,OwnPropsType,AppStateType>(mapStateToProps,{requestGetRecipes})
 (RecipeListContainer))

@@ -3,10 +3,9 @@ import { Recipe } from '../../../types/types';
 
 interface PropsType {
   recipes: Array<Recipe>;
-  requestSetRecipe: (recipe: Recipe) => void;
 }
 
-const RecipeList: FC<PropsType> = ({ recipes, requestSetRecipe }) => {
+const RecipeList: FC<PropsType> = ({ recipes }) => {
   const elementRecipe = recipes.map((recipe: Recipe) => 
   <div style={{'margin': '30px'}}>
     <div><b>name:</b> {recipe.name}</div>
