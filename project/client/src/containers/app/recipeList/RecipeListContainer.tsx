@@ -7,7 +7,7 @@ import RecipeList from '.';
 import { getRecipes } from '../../../store/selectors';
 import { Recipe } from '../../../types/types';
 import { AppStateType } from '../../../store';
-import HeaderContainer from "../header/HeaderContainer";
+import HeaderContainer from "../../../components/header/HeaderContainer";
 
 interface MapStatePropsType  {
   recipes: Array<Recipe>;
@@ -29,7 +29,7 @@ class RecipeListContainer extends React.Component<PropsType> {
 
   render() {
     const { recipes } = this.props;
-    console.log(recipes);
+
     return (
       <>
         <HeaderContainer />

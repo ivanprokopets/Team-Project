@@ -13,3 +13,9 @@ export interface Product {
   description: string;
   type:string;
 }
+
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+}

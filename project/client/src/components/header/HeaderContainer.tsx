@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { compose } from 'redux';
 
-import {  requestFilterRecipe } from '../../../store/appReducer';
-import { getRecipes } from '../../../store/selectors';
-import { Recipe } from '../../../types/types';
-import { AppStateType } from '../../../store';
+import {  requestFilterRecipe } from '../../store/appReducer';
+import { getRecipes } from '../../store/selectors';
+import { Recipe } from '../../types/types';
+import { AppStateType } from '../../store';
 import Header from './Header';
 
 
