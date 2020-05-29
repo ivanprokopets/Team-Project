@@ -5,9 +5,9 @@ const instance = axios.create({
     baseURL: 'http://localhost:4000/',
 
 });
-
+const token =localStorage.getItem('accessToken');
 const headers={
-    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    Authorization: `Bearer ${token ? JSON.parse(token).value: ''}`,
     'content-type': 'application/json',
 }
 export const recipeAPI = { 

@@ -8,6 +8,7 @@ import { getRecipes } from '../../../store/selectors';
 import { Recipe } from '../../../types/types';
 import { AppStateType } from '../../../store';
 import HeaderContainer from "../../../components/header/HeaderContainer";
+import withExistToken from '../../../HOC/withExistToken';
 
 interface MapStatePropsType  {
   recipes: Array<Recipe>;
@@ -32,7 +33,7 @@ class RecipeListContainer extends React.Component<PropsType> {
 
     return (
       <>
-        <HeaderContainer />
+        <HeaderContainer withSearch/>
         <RecipeList recipes={recipes} />
       </>
     );
@@ -45,6 +46,6 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
   };
 };
 
-export default compose(
+export default 
     connect<MapStatePropsType,MapDispatchPropsType,OwnPropsType,AppStateType>(mapStateToProps,{requestGetRecipes})
-(RecipeListContainer))
+(withExistToken(RecipeListContainer))

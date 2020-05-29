@@ -9,6 +9,8 @@ import { User } from '../../../types/types';
 import { AppStateType } from '../../../store';
 import HeaderContainer from '../../../components/header/HeaderContainer';
 import jwt from 'jwt-decode';
+import withAuthRedirect from '../../../HOC/withAuthRedirect';
+import withExistToken from '../../../HOC/withExistToken';
 
 interface MapStatePropsType {
   user: User;
@@ -24,8 +26,11 @@ type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
 
 class ProfileContainer extends React.Component<PropsType> {
   componentDidMount() {
-    const { userId } = jwt(localStorage.getItem('accessToken') || '');
-    this.props.requestGetUser(userId);
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      const { userId } = jwt(JSON.parse(token).value);
+      this.props.requestGetUser(userId);
+    }
   }
   render() {
     return (
@@ -43,8 +48,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
   };
 };
 
-export default compose(
+export default 
   connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
     requestGetUser,
-  })(ProfileContainer),
-);
+  })(withExistToken(withAuthRedirect(ProfileContainer)));

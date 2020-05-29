@@ -17,26 +17,26 @@ export const InputText = ({ input, meta, ...props }:any) => {
   );
 };
 
-// export const TextArea = ({ input, meta, ...props }) => {
-//   const hasError = meta.touched && meta.error;
-//   const hasWarning = meta.warning;
-//   return (
-//     <div className={s.formControl + ' ' + (hasError ? s.error : '')}>
-//       {hasWarning && (
-//         <span className={s.blockPrintWarning}>
-//           <div className={s.printWaring}>{meta.warning}</div>
-//         </span>
-//       )}
+export const TextArea = ({ input, meta, ...props }:any) => {
+  const hasError = meta.touched && meta.error;
+  const hasWarning = meta.warning;
+  return (
+    <div className={s.formControl + ' ' + (hasError ? s.error : '')}>
+      {hasWarning && (
+        <span className={s.blockPrintWarning}>
+          <div className={s.printWaring}>{meta.warning}</div>
+        </span>
+      )}
 
-//       <Form.Control as="textarea" {...input} rows="3" placeholder={props.placeholder} />
-//       {hasError && (
-//         <span className={s.blockPrintError}>
-//           <div className={s.printError}>{meta.error}</div>
-//         </span>
-//       )}
-//     </div>
-//   );
-// };
+      <Form.Control as="textarea" {...input} rows="3" placeholder={props.placeholder} />
+      {hasError && (
+        <span className={s.blockPrintError}>
+          <div className={s.printError}>{meta.error}</div>
+        </span>
+      )}
+    </div>
+  );
+};
 
 // export const InputFile = ({ input, meta, ...props }) => {
 //   const hasError = meta.touched && meta.error;

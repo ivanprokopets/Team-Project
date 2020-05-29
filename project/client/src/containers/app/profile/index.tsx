@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Recipe, User } from '../../../types/types';
+import { NavLink } from 'react-router-dom';
 
 interface PropsType {
   user: User;
@@ -15,7 +16,9 @@ const Profile: FC<PropsType> = ({ user }) => {
         <div>
           <b>email:</b> {user.email}
         </div>
-
+        <NavLink to="/addRecipe">
+          add recipe
+        </NavLink>
       </div>
     </>
   );

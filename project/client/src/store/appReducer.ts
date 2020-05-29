@@ -1,7 +1,7 @@
 import { productAPI } from './../api/api';
 import { recipeAPI } from '../api/api';
 import { AppStateType } from '.';
-import { Recipe,Product} from '../types/types';
+import { Recipe, Product } from '../types/types';
 import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
@@ -12,14 +12,13 @@ const SET_PRODUCTS = 'SET_PRODUCTS';
 const SET_PRODUCT = 'SET_PRODUCT';
 
 const initialState = {
-  recipe:{
+  recipe: {
     id: 0,
     name: '',
     ingredients: [''],
     timeForPreparing: 0,
-    description:
-      '',
-   rating: 0,
+    description: '',
+    rating: 0,
   } as Recipe,
   recipes: [
     {
@@ -27,12 +26,12 @@ const initialState = {
       name: '',
       ingredients: [''],
       timeForPreparing: 0,
-      description:'',
+      description: '',
       rating: 0,
     },
   ] as Array<Recipe>,
-  product:{}as Product,
-  products:[]as Array<Product>
+  product: {} as Product,
+  products: [] as Array<Product>,
 };
 
 type InitialState = typeof initialState;
@@ -64,7 +63,11 @@ const AppReducer = (state = initialState, action: ActionsTypes): InitialState =>
   }
 };
 
-type ActionsTypes = SetRecipesActionType|SetRecipeActionType|SetProductActionType|SetProductsActionType;
+type ActionsTypes =
+  | SetRecipesActionType
+  | SetRecipeActionType
+  | SetProductActionType
+  | SetProductsActionType;
 
 interface SetRecipesActionType {
   type: typeof SET_RECIPES;
@@ -100,24 +103,21 @@ export const setProducts = (products: Array<Product>): SetProductsActionType => 
   products,
 });
 
-
-
 type GetStateType = () => AppStateType;
 type DispatchType = Dispatch<ActionsTypes>;
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
 
-
 export const requestGetRecipes = (): ThunkType => {
   return async (dispatch, getState) => {
-    const {data} = await recipeAPI.getRecipes();
-    console.log(data)
+    const { data } = await recipeAPI.getRecipes();
+    console.log(data);
     dispatch(setRecipes(data));
   };
 };
 
-export const requestGetRecipe = (id:string): ThunkType => {
+export const requestGetRecipe = (id: string): ThunkType => {
   return async (dispatch, getState) => {
-    const {data} = await recipeAPI.getRecipe(id);
+    const { data } = await recipeAPI.getRecipe(id);
     dispatch(setRecipe(data));
   };
 };
@@ -127,21 +127,21 @@ export const requestAddRecipe = (recipe: Recipe): ThunkType => {
     requestGetRecipes();
   };
 };
-export const requestUpdateRecipe = (id:string,recipe: Recipe): ThunkType => {
+export const requestUpdateRecipe = (id: string, recipe: any): ThunkType => {
   return async (dispatch, getState) => {
-    await recipeAPI.updateRecipe({id,...recipe});
+    await recipeAPI.updateRecipe({ id, ...recipe });
     requestGetRecipes();
   };
 };
-export const requestRemoveRecipe = (id:string): ThunkType => {
+export const requestRemoveRecipe = (id: string): ThunkType => {
   return async (dispatch, getState) => {
     await recipeAPI.removeRecipe(id);
     requestGetRecipes();
   };
 };
-export const requestFilterRecipe = (ingredients:Array<string>): ThunkType => {
+export const requestFilterRecipe = (ingredients: Array<string>): ThunkType => {
   return async (dispatch, getState) => {
-    const {data} = await recipeAPI.filter(ingredients);
+    const { data } = await recipeAPI.filter(ingredients);
     dispatch(setRecipes(data));
   };
 };
@@ -149,13 +149,13 @@ export const requestFilterRecipe = (ingredients:Array<string>): ThunkType => {
 //products
 export const requestGetProducts = (): ThunkType => {
   return async (dispatch, getState) => {
-    const {data} = await productAPI.getProducts();
+    const { data } = await productAPI.getProducts();
     dispatch(setProducts(data));
   };
 };
-export const requestGetProduct = (id:string): ThunkType => {
+export const requestGetProduct = (id: string): ThunkType => {
   return async (dispatch, getState) => {
-    const {data} = await productAPI.getProduct(id);
+    const { data } = await productAPI.getProduct(id);
     dispatch(setProduct(data));
   };
 };
@@ -165,13 +165,13 @@ export const requestAddProduct = (product: Product): ThunkType => {
     requestGetProducts();
   };
 };
-export const requestUpdateProduct = (id:string,product: Product): ThunkType => {
+export const requestUpdateProduct = (id: string, product: Product): ThunkType => {
   return async (dispatch, getState) => {
-    await productAPI.updateProduct({id,...product});
+    await productAPI.updateProduct({ id, ...product });
     requestGetProducts();
   };
 };
-export const requestRemoveProduct = (id:string): ThunkType => {
+export const requestRemoveProduct = (id: string): ThunkType => {
   return async (dispatch, getState) => {
     await productAPI.removeProduct(id);
     requestGetProducts();

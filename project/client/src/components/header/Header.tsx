@@ -4,8 +4,10 @@ import { NavLink } from 'react-router-dom';
 
 const Header = ({
   requestFilterRecipe,
+  withSearch,
 }: {
   requestFilterRecipe: (ingredients: Array<string>) => void;
+  withSearch?: boolean;
 }) => {
   const [searchText, setSearchText] = useState('');
 
@@ -17,20 +19,32 @@ const Header = ({
     <header className={styles.header}>
       <h1 style={{ marginLeft: '30px', marginRight: '30px' }}>Generator for pidarasow</h1>
       <div className="search-form">
-        <input
-          className="login"
-          type="text"
-          value={searchText}
-          onChange={(event) => setSearchText(event.target.value)}
-        />
-        <button className="search-button" onClick={onSearchSubmit}>
-          Search
-        </button>
+        {withSearch && (
+          <>
+            <input
+              className="login"
+              type="text"
+              value={searchText}
+              onChange={(event) => setSearchText(event.target.value)}
+            />
+            <button className="search-button" onClick={onSearchSubmit}>
+              Search
+            </button>
+          </>
+        )}
+
         {localStorage.getItem('accessToken') ? (
           <>
-            <NavLink style={{ marginLeft: '30px' }} to="/profile">
-              profile
-            </NavLink>
+            {withSearch ? (
+              <NavLink style={{ marginLeft: '30px' }} to="/profile">
+                profile
+              </NavLink>
+            ) : (
+              <NavLink style={{ marginLeft: '30px' }} to="/">
+                recipes
+              </NavLink>
+            )}
+
             <NavLink
               onClick={() => {
                 localStorage.removeItem('accessToken');

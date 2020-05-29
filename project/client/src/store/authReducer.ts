@@ -33,7 +33,8 @@ export const requestSignIn = (email:string,password:string): ThunkType => {
   return async (dispatch, getState) => {
     const {data} = await authAPI.signIn(email,password);
     console.log(data);
-    localStorage.setItem('accessToken',data.accessToken);
+    const token = {value:data.accessToken,time:new Date().getTime()}
+    localStorage.setItem('accessToken',JSON.stringify(token));
     localStorage.setItem('refreshToken',data.refreshToken);
     console.log('sign in');
   };
