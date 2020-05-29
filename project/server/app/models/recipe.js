@@ -4,8 +4,9 @@ const RecipeSchema = new mongoose.Schema({
     name: String,
     timeForPreparing:String,
     description:String,
-    products: Array,
-    isPublic:Boolean
+    ingredients: Array,
+    isPublic:Boolean,
+    rating:Number
 })
 
 mongoose.model('Recipe',RecipeSchema );

@@ -1,8 +1,21 @@
 export interface Recipe {
-  id: number;
+  id?: number;
   name: string;
   ingredients: Array<string>;
-  preparationTimeMinutes: number;
+  timeForPreparing: number;
   description: string;
   rating: number;
+  isPublic:boolean;
+}
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+  type:string;
+}
+
+export interface User {
+  id: number;
+  name: string;
+  email: string;
 }

@@ -23,6 +23,7 @@ const updateTokens = userId => {
 };
 
 const signIn = (req, res) => {
+  
   const { email, password } = req.body;
   User.findOne({ email })
     .exec()
@@ -41,6 +42,9 @@ const signIn = (req, res) => {
       }
     })
     .catch(err => res.status(500).json({ message: err.message }));
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
 };
 
 const register = (req, res) => {
@@ -65,6 +69,9 @@ const register = (req, res) => {
       }
     })
     .catch(err => res.status(500).json({ message: err.message }));
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
 };
 
 const refreshTokens = (req, res) => {
@@ -97,6 +104,9 @@ const refreshTokens = (req, res) => {
     })
     .then(tokens => res.json(tokens))
     .catch(err => res.status(400).json({ message: err.message }));
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
 };
 
 module.exports = {

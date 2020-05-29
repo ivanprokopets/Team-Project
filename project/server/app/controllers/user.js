@@ -9,6 +9,9 @@ const mongoose = require('mongoose');
     .catch(err=> {
         res.status(500).json(err);
     });
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
  }
 
  const getUser=(req,res)=> {
@@ -18,6 +21,9 @@ const mongoose = require('mongoose');
     .catch(err=> {
         res.status(500).json(err);
     });
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
  }
 
  const update=(req,res)=>{
@@ -29,6 +35,9 @@ const mongoose = require('mongoose');
     .catch(err=> {
         res.status(500).json(err);
     });
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
  }
 
  const remove=(req,res)=>{
@@ -39,6 +48,9 @@ const mongoose = require('mongoose');
     .catch(err=> {
         res.status(500).json(err);
     });
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
  }
 
  module.exports={

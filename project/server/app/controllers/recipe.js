@@ -13,6 +13,9 @@ const getAll = (req, res) => {
     .catch(err => {
       res.status(500).json(err);
     });
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
 };
 
 const getRecipe=(req,res)=> {
@@ -22,17 +25,23 @@ const getRecipe=(req,res)=> {
     .catch(err=> {
         res.status(500).json(err);
     });
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
  }
 const filterRecipes=(req,res)=>{
     Recipe.find()
     .exec()
     .then(recipes => {
-      const filteredRecipes = recipes.filter(recipe=>_.intersection(recipe.products,req.body.products).length === req.body.products.length)
+      const filteredRecipes = recipes.filter(recipe=>_.intersection(recipe.ingredients,req.body.ingredients).length === req.body.ingredients.length)
       res.json(filteredRecipes);
     })
     .catch(err => {
       res.status(500).json(err);
     });
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
 }
 const create = (req, res) => {
     Recipe.create(req.body)
@@ -42,6 +51,9 @@ const create = (req, res) => {
     .catch(err => {
       res.status(500).json(err);
     });
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
 };
 
 const update = (req, res) => {
@@ -53,6 +65,9 @@ const update = (req, res) => {
     .catch(err => {
       res.status(500).json(err);
     });
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
 };
 
 const remove = (req, res) => {
@@ -63,6 +78,9 @@ const remove = (req, res) => {
     .catch(err => {
       res.status(500).json(err);
     });
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
 };
 
 module.exports = {

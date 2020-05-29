@@ -11,6 +11,9 @@ const getAll = (req, res) => {
     .catch(err => {
       res.status(500).json(err);
     });
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
 };
 
 const getProduct=(req,res)=> {
@@ -20,6 +23,9 @@ const getProduct=(req,res)=> {
   .catch(err=> {
       res.status(500).json(err);
   });
+  res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
 }
 
 const create = (req, res) => {
@@ -30,6 +36,9 @@ const create = (req, res) => {
     .catch(err => {
       res.status(500).json(err);
     });
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
 };
 
 const update = (req, res) => {
@@ -41,6 +50,9 @@ const update = (req, res) => {
     .catch(err => {
       res.status(500).json(err);
     });
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
 };
 
 const remove = (req, res) => {
@@ -51,6 +63,9 @@ const remove = (req, res) => {
     .catch(err => {
       res.status(500).json(err);
     });
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
 };
 
 module.exports = {

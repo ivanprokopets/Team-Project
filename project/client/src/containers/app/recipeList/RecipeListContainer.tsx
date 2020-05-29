@@ -2,19 +2,19 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { compose } from 'redux';
 
-import { requestSetRecipe, requestGetRecipes } from '../../../store/appReducer';
+import {  requestGetRecipes } from '../../../store/appReducer';
 import RecipeList from '.';
 import { getRecipes } from '../../../store/selectors';
 import { Recipe } from '../../../types/types';
 import { AppStateType } from '../../../store';
-
+import HeaderContainer from "../../../components/header/HeaderContainer";
+import withExistToken from '../../../HOC/withExistToken';
 
 interface MapStatePropsType  {
   recipes: Array<Recipe>;
 };
 
 interface MapDispatchPropsType  {
-  requestSetRecipe: (recipe: Recipe) => void;
   requestGetRecipes: () => void;
 };
 
@@ -24,15 +24,17 @@ type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
 
 class RecipeListContainer extends React.Component<PropsType> {
   componentDidMount() {
-    //when will be backend
-    //this.props.requestGetRecipes();
+    this.props.requestGetRecipes();
+  
   }
 
   render() {
-    const { recipes, requestSetRecipe } = this.props;
+    const { recipes } = this.props;
+
     return (
       <>
-        <RecipeList recipes={recipes} requestSetRecipe={requestSetRecipe} />
+        <HeaderContainer withSearch/>
+        <RecipeList recipes={recipes} />
       </>
     );
   }
@@ -44,6 +46,6 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
   };
 };
 
-export default compose(
-    connect<MapStatePropsType,MapDispatchPropsType,OwnPropsType,AppStateType>(mapStateToProps,{requestGetRecipes,requestSetRecipe})
-(RecipeListContainer))
+export default 
+    connect<MapStatePropsType,MapDispatchPropsType,OwnPropsType,AppStateType>(mapStateToProps,{requestGetRecipes})
+(withExistToken(RecipeListContainer))
