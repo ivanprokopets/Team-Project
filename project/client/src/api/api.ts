@@ -21,14 +21,13 @@ export const recipeAPI = {
         timeForPreparing,
         description,
         ingredients,
-        isPublic,
-        rating}: Recipe) {
+        isPublic}: Recipe) {
         return instance.post(`recipe`, { name,
             timeForPreparing,
             description,
             ingredients,
             isPublic,
-            rating},{headers});
+            rating:0},{headers});
     },
     updateRecipe({ id, name,
         timeForPreparing,

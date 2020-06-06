@@ -17,7 +17,7 @@ const Header = ({
 
   return (
     <header className={styles.header}>
-      <h1 style={{ marginLeft: '30px', marginRight: '30px' }}>Generator for pidarasow</h1>
+      <h1 style={{ marginLeft: '30px', marginRight: '30px' }}>Generator receptur</h1>
       <div className="search-form">
         {withSearch && (
           <>
