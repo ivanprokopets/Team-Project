@@ -1,5 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Recipe } from '../../../types/types';
+import { required } from '../../../utils/validation';
+import { Redirect } from 'react-router-dom';
 
 interface PropsType {
   recipes: Array<Recipe>;
@@ -18,6 +20,8 @@ const RecipeList: FC<PropsType> = ({
   userId,
   requestUpdateRecipe,
 }) => {
+  const [isRedirect, toggleRedirect] = useState(false);
+  const [recipeId, setRecipeId] = useState('');
   const checkUserId = (likers: Array<string>) => {
     return likers.find((e) => e === userId);
   };
@@ -41,35 +45,40 @@ const RecipeList: FC<PropsType> = ({
     });
     requestGetRecipes();
   };
-  const elementRecipe = recipes.map((recipe: Recipe) => {
+  const onRecipe = (id: string) => {
+    setRecipeId(id);
+    toggleRedirect(true);
+  };
+  const elementRecipe = recipes.map((recipe: any) => {
     return (
       <div style={{ margin: '30px' }}>
-        <div>
-          <b>name:</b> {recipe.name}
-        </div>
-        <div>
-          <b>ingredients:</b>{' '}
-          {recipe.ingredients.map((ingredient) => (
-            <span>{ingredient}, </span>
-          ))}
+        <div onClick={() => onRecipe(recipe._id)}>
+          <div>
+            <b>name:</b> {recipe.name}
+          </div>
+          <img
+            src={require('../../../images/food_default.png')}
+            style={{ width: 200, height: 200 }}
+          />
+          <div>
+            <b>ingredients:</b>{' '}
+            {recipe.ingredients.map((ingredient: any) => (
+              <span>{ingredient}, </span>
+            ))}
+          </div>
         </div>
 
-        <div>
-          <b>description: </b> {recipe.description}
-        </div>
-        {recipe.isPublic &&
-          (checkUserId(recipe.likers) ? (
-            <>
-              <button onClick={() => dislikeRecipe(recipe)}>dislike</button>
-              <b>likes</b>:{recipe.likers.length}
-            </>
-          ) : (
-            <>
-              <button onClick={() => likeRecipe(recipe)}>like</button>
-              <b>likes</b>:{recipe.likers.length}
-            </>
-          ))}
-        <div></div>
+        {recipe.isPublic && (
+          <>
+            <b>likes</b>:{recipe.likers.length}
+            {isAuth &&
+              (checkUserId(recipe.likers) ? (
+                <button onClick={() => dislikeRecipe(recipe)}>dislike</button>
+              ) : (
+                <button onClick={() => likeRecipe(recipe)}>like</button>
+              ))}
+          </>
+        )}
       </div>
     );
   });
@@ -85,6 +94,9 @@ const RecipeList: FC<PropsType> = ({
     togglePublic('none');
     requestGetRecipes();
   };
+  if (isRedirect) {
+    return <Redirect to={`/recipe/${recipeId}`} />;
+  }
   return (
     <>
       {isAuth && (

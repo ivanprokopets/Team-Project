@@ -8,6 +8,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import RegisterContainer from './containers/auth/register/RegisterContainer';
 import ProfileContainer from './containers/app/profile/ProfileContainer';
 import AddRecipeContainer from './components/addRecipe/AddRecipeContainer';
+import RecipeContainer from './containers/app/recipe/RecipeContainer';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/register" exact component={RegisterContainer} />
           <Route path="/profile" exact component={ProfileContainer} />
           <Route path="/addRecipe" exact component={AddRecipeContainer} />
+          <Route path="/recipe/:recipeId" exact component={RecipeContainer} />
         </Switch>
       </div>
     </Provider>

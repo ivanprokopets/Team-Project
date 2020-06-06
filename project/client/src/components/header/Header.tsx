@@ -1,33 +1,88 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './header-component.module.css';
 import { NavLink } from 'react-router-dom';
+import { Product } from '../../types/types';
 
 const Header = ({
-  requestFilterRecipe,
+  requestGetRecipes,
   withSearch,
   isAuth,
+  productSearch,
+  setProductSearch,
+  setProducts,
+  requestFilterProducts,
+  products,
 }: {
-  requestFilterRecipe: (ingredients: Array<string>) => void;
+  requestGetRecipes: (ingredients?: Array<string>) => void;
+  requestFilterProducts: () => void;
+  setProductSearch: (product: string) => void;
+  setProducts: (products: Array<Product>) => void;
   withSearch?: boolean;
   isAuth: boolean;
+  productSearch: string;
+  products: any;
 }) => {
-  const [searchText, setSearchText] = useState('');
+  useEffect(() => {
+    requestFilterProducts();
+  }, [productSearch]);
+  const [searchArray, setSearchArray] = useState(['']);
 
   const onSearchSubmit = (e: any) => {
-    requestFilterRecipe(searchText.split(','));
+    requestGetRecipes(searchArray.slice(1));
   };
+  const selectProduct = (name: string) => {
+    setSearchArray([...searchArray, name]);
+    console.log(products);
+    const productsFilter = products.filter((e: any) => e.name != name);
+    console.log(productsFilter);
+    setProducts(productsFilter);
+    setProductSearch('');
+  };
+  const removeProduct = (product: string) => {
+    const products = searchArray.filter((e: string) => e != product);
 
+    setSearchArray(products);
+  };
   return (
     <header className={styles.header}>
       <h1 style={{ marginLeft: '30px', marginRight: '30px' }}>Generator for pidarow</h1>
+      <div style={{ flexDirection: 'row', display: 'inlineBlock' }}>
+        {products.map((product: any) => (
+          <span
+            onClick={() => {
+              selectProduct(product.name);
+            }}>
+            {product.name + ' '}
+          </span>
+        ))}
+      </div>
       <div className="search-form">
         {withSearch && (
           <>
+            {searchArray.length > 0 &&
+              searchArray.map((product: string) => {
+                return product ? (
+                  <span className={styles.product}>
+                    {product}
+
+                    <span
+                      style={{ color: 'red' }}
+                      onClick={() => {
+                        removeProduct(product);
+                      }}>
+                      X
+                    </span>
+                  </span>
+                ) : (
+                  <></>
+                );
+              })}
+
             <input
-              className="login"
+              className={styles.searchInput}
               type="text"
-              value={searchText}
-              onChange={(event) => setSearchText(event.target.value)}
+              value={productSearch}
+              onChange={(event) => setProductSearch(event.target.value)}
             />
             <button className="search-button" onClick={onSearchSubmit}>
               Search
@@ -52,7 +107,7 @@ const Header = ({
                 localStorage.removeItem('accessToken');
               }}
               style={{ marginLeft: '30px', marginRight: '30px' }}
-              to="/login">
+              to="/">
               logout
             </NavLink>
           </>

@@ -3,13 +3,16 @@ import { Redirect } from 'react-router-dom';
 import { AppStateType } from '../store';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { toggleAuth } from '../store/authReducer';
+import jwt from 'jwt-decode';
+import { toggleAuth, setUserId } from '../store/authReducer';
 interface MapStatePropsType {
   isAuth: boolean;
 }
 
-interface MapDispatchPropsType {}
-
+interface MapDispatchPropsType {
+  toggleAuth: (isAuth: boolean) => void;
+  setUserId: (userId: string) => void;
+}
 interface OwnPropsType {}
 
 type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
@@ -19,11 +22,9 @@ const withAuthRedirect = (WrappedComponent: any) => {
     render() {
       const token = localStorage.getItem('accessToken');
       if (token) {
-        toggleAuth(true);
-      } else {
-        toggleAuth(false);
-      }
-      if (this.props.isAuth) {
+        this.props.toggleAuth(true);
+        const { userId } = jwt(JSON.parse(token).value);
+        this.props.setUserId(userId);
         return <WrappedComponent {...this.props} />;
       } else {
         return <Redirect to="/login" />;
@@ -39,6 +40,7 @@ const withAuthRedirect = (WrappedComponent: any) => {
 
   return compose(
     connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
+      setUserId,
       toggleAuth,
     })(HeaderContainer),
   );
