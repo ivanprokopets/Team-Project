@@ -11,6 +11,8 @@ const SET_RECIPE = 'SET_RECIPE';
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const SET_PRODUCT = 'SET_PRODUCT';
 const TOGGLE_PUBLIC = 'TOGGLE_PUBLIC';
+const SET_PRODUCT_SEARCH = 'SET_PRODUCT_SEARCH';
+
 const initialState = {
   recipe: {
     id: 0,
@@ -35,6 +37,7 @@ const initialState = {
   product: {} as Product,
   products: [] as Array<Product>,
   isPublic: 'none' as string,
+  productSearch: '' as string,
 };
 
 type InitialState = typeof initialState;
@@ -66,6 +69,12 @@ const AppReducer = (state = initialState, action: ActionsTypes): InitialState =>
         ...state,
         isPublic: action.isPublic,
       };
+    case SET_PRODUCT_SEARCH:
+      return {
+        ...state,
+        productSearch: action.productSearch,
+      };
+
     default:
       return state;
   }
@@ -76,7 +85,9 @@ type ActionsTypes =
   | SetRecipeActionType
   | SetProductActionType
   | SetProductsActionType
-  | TogglePublicActionType;
+  | TogglePublicActionType
+  | SetProductSearchActionType;
+
 interface SetRecipesActionType {
   type: typeof SET_RECIPES;
   recipes: Array<Recipe>;
@@ -110,6 +121,14 @@ export const setProducts = (products: Array<Product>): SetProductsActionType => 
   type: SET_PRODUCTS,
   products,
 });
+interface SetProductSearchActionType {
+  type: typeof SET_PRODUCT_SEARCH;
+  productSearch: string;
+}
+export const setProductSearch = (productSearch: string): SetProductSearchActionType => ({
+  type: SET_PRODUCT_SEARCH,
+  productSearch,
+});
 interface TogglePublicActionType {
   type: typeof TOGGLE_PUBLIC;
   isPublic: string;
@@ -123,10 +142,14 @@ type GetStateType = () => AppStateType;
 type DispatchType = Dispatch<ActionsTypes>;
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
 
-export const requestGetRecipes = (): ThunkType => {
+export const requestGetRecipes = (ingredients?: Array<string>): ThunkType => {
   return async (dispatch, getState) => {
     if (getState().auth.isAuth) {
-      const { data } = await recipeAPI.getRecipes(getState().app.isPublic, getState().auth.userId);
+      const { data } = await recipeAPI.getRecipes(
+        getState().app.isPublic,
+        getState().auth.userId,
+        ingredients,
+      );
       dispatch(setRecipes(data));
     } else {
       const { data } = await recipeAPI.getRecipes(getState().app.isPublic);
@@ -135,9 +158,9 @@ export const requestGetRecipes = (): ThunkType => {
   };
 };
 
-export const requestGetRecipe = (id: string): ThunkType => {
+export const requestGetRecipe = (recipeId: string): ThunkType => {
   return async (dispatch, getState) => {
-    const { data } = await recipeAPI.getRecipe(id);
+    const { data } = await recipeAPI.getRecipe(recipeId);
     dispatch(setRecipe(data));
   };
 };
@@ -180,6 +203,18 @@ export const requestGetProducts = (): ThunkType => {
   return async (dispatch, getState) => {
     const { data } = await productAPI.getProducts();
     dispatch(setProducts(data));
+  };
+};
+export const requestFilterProducts = (): ThunkType => {
+  return async (dispatch, getState) => {
+    const productSearch = getState().app.productSearch;
+    if (productSearch) {
+      const { data } = await productAPI.searchProduct(productSearch);
+      dispatch(setProducts(data.splice(0, 5)));
+    } else {
+      const { data } = await productAPI.getProducts();
+      dispatch(setProducts(data.splice(0, 5)));
+    }
   };
 };
 export const requestGetProduct = (id: string): ThunkType => {

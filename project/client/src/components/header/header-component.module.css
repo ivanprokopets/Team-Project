@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #CEE5D7;
+  background-color: #cee5d7;
 }
 
 .title {
@@ -21,4 +21,20 @@
 
 .loginBlock a {
   color: white;
+}
+
+.searchInput {
+  padding: 2px 2px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid red;
+}
+.product {
+  padding: 3px 4px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  background-color: white;
+  border-bottom: 2px solid red;
 }

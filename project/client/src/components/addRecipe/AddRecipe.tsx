@@ -4,10 +4,9 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Field, reduxForm } from 'redux-form';
-import { InputEmail, InputPassword, InputText, TextArea } from '../../common/formsControls';
+import { InputText, TextArea } from '../../common/formsControls';
 import { required } from '../../utils/validation';
 import { Redirect } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
 import { Recipe } from '../../types/types';
 
 interface Props {
@@ -85,6 +84,7 @@ const FormRecipe = (props: any) => {
           />
         </Col>
       </Form.Group>
+
       <Form.Group as={Row}>
         <Form.Label column sm="4">
           timeForPreparing
@@ -113,7 +113,7 @@ const FormRecipe = (props: any) => {
           />
         </Col>
       </Form.Group>
-      
+
       <Form.Group as={Row}>
         <Form.Label column sm="4">
           isPublic

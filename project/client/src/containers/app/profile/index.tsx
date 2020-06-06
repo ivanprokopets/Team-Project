@@ -16,9 +16,7 @@ const Profile: FC<PropsType> = ({ user }) => {
         <div>
           <b>email:</b> {user.email}
         </div>
-        <NavLink to="/addRecipe">
-          add recipe
-        </NavLink>
+        <NavLink to="/addRecipe">add recipe</NavLink>
       </div>
     </>
   );

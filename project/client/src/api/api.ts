@@ -10,8 +10,8 @@ const headers = {
   'content-type': 'application/json',
 };
 export const recipeAPI = {
-  getRecipes(isPublic: string, userId?: string) {
-    return instance.get(`recipe`, { params: { isPublic, userId }, headers });
+  getRecipes(isPublic: string, userId?: string,ingredients?: Array<string>) {
+    return instance.get(`recipe`, { params: { isPublic, userId,ingredients }, headers });
   },
   getRecipe(id: string) {
     return instance.get(`recipe/${id}`, { headers });
@@ -66,6 +66,9 @@ export const productAPI = {
   },
   removeProduct(id: string) {
     return instance.delete(`product/${id}`, { headers });
+  },
+  searchProduct(product: string) {
+    return instance.get(`productsearch`, { params: { product }, headers });
   },
 };
 export const authAPI = {
