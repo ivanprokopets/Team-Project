@@ -11,23 +11,23 @@ const headers={
     'content-type': 'application/json',
 }
 export const recipeAPI = { 
-    getRecipes() {
-        return instance.get(`recipe`,{headers});
+    getRecipes(isPublic:string,userId?:string) {
+        return instance.get(`recipe`,{params:{isPublic,userId},headers}, );
     },
     getRecipe(id:string) {
         return instance.get(`recipe/${id}`,{headers});
     },
-    addRecipe({ name,
+    addRecipe({userId,recipe: {name,
         timeForPreparing,
         description,
         ingredients,
-        isPublic}: Recipe) {
+        isPublic}}: {userId:string;recipe:Recipe}) {
         return instance.post(`recipe`, { name,
             timeForPreparing,
             description,
             ingredients,
             isPublic,
-            rating:0},{headers});
+            rating:0,creatorId:userId},{headers});
     },
     updateRecipe({ id, name,
         timeForPreparing,
@@ -42,8 +42,8 @@ export const recipeAPI = {
                 isPublic,
                 rating},{headers});
         },
-    filter(ingredients:Array<string>) {
-        return instance.post(`recipe/filter`,{ingredients},{headers});    
+    filter(ingredients:Array<string>,userId?:string) {
+        return instance.post(`recipe/filter`,{ingredients,userId},{headers});    
     },
     removeRecipe(id:string) {
         return instance.delete(`recipe/${id}`,{headers});    

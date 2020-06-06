@@ -1,40 +1,44 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import {  requestGetRecipes } from '../../../store/appReducer';
+import { requestGetRecipes, togglePublic } from '../../../store/appReducer';
 import RecipeList from '.';
 import { getRecipes } from '../../../store/selectors';
 import { Recipe } from '../../../types/types';
 import { AppStateType } from '../../../store';
-import HeaderContainer from "../../../components/header/HeaderContainer";
+import HeaderContainer from '../../../components/header/HeaderContainer';
 import withExistToken from '../../../HOC/withExistToken';
 
-interface MapStatePropsType  {
+interface MapStatePropsType {
   recipes: Array<Recipe>;
-};
+}
 
-interface MapDispatchPropsType  {
+interface MapDispatchPropsType {
   requestGetRecipes: () => void;
-};
+  togglePublic: (isPublic: string) => void;
+}
 
-interface OwnPropsType  {};
+interface OwnPropsType {}
 
 type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
 
 class RecipeListContainer extends React.Component<PropsType> {
   componentDidMount() {
     this.props.requestGetRecipes();
-  
   }
 
   render() {
-    const { recipes } = this.props;
+    const { recipes, togglePublic, requestGetRecipes } = this.props;
 
     return (
       <>
-        <HeaderContainer withSearch/>
-        <RecipeList recipes={recipes} />
+        <HeaderContainer withSearch />
+        <RecipeList
+          recipes={recipes}
+          togglePublic={togglePublic}
+          requestGetRecipes={requestGetRecipes}
+        />
       </>
     );
   }
@@ -46,6 +50,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
   };
 };
 
-export default 
-    connect<MapStatePropsType,MapDispatchPropsType,OwnPropsType,AppStateType>(mapStateToProps,{requestGetRecipes})
-(withExistToken(RecipeListContainer))
+export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(
+  mapStateToProps,
+  { requestGetRecipes, togglePublic },
+)(withExistToken(RecipeListContainer));
