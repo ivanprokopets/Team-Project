@@ -10,7 +10,7 @@ const SET_RECIPE = 'SET_RECIPE';
 
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const SET_PRODUCT = 'SET_PRODUCT';
-
+const TOGGLE_PUBLIC = 'TOGGLE_PUBLIC';
 const initialState = {
   recipe: {
     id: 0,
@@ -18,7 +18,8 @@ const initialState = {
     ingredients: [''],
     timeForPreparing: 0,
     description: '',
-    rating: 0,
+
+    likers: [''],
   } as Recipe,
   recipes: [
     {
@@ -27,11 +28,13 @@ const initialState = {
       ingredients: [''],
       timeForPreparing: 0,
       description: '',
-      rating: 0,
+
+      likers: [''],
     },
   ] as Array<Recipe>,
   product: {} as Product,
   products: [] as Array<Product>,
+  isPublic: 'none' as string,
 };
 
 type InitialState = typeof initialState;
@@ -58,6 +61,11 @@ const AppReducer = (state = initialState, action: ActionsTypes): InitialState =>
         ...state,
         product: action.product,
       };
+    case TOGGLE_PUBLIC:
+      return {
+        ...state,
+        isPublic: action.isPublic,
+      };
     default:
       return state;
   }
@@ -67,8 +75,8 @@ type ActionsTypes =
   | SetRecipesActionType
   | SetRecipeActionType
   | SetProductActionType
-  | SetProductsActionType;
-
+  | SetProductsActionType
+  | TogglePublicActionType;
 interface SetRecipesActionType {
   type: typeof SET_RECIPES;
   recipes: Array<Recipe>;
@@ -102,6 +110,14 @@ export const setProducts = (products: Array<Product>): SetProductsActionType => 
   type: SET_PRODUCTS,
   products,
 });
+interface TogglePublicActionType {
+  type: typeof TOGGLE_PUBLIC;
+  isPublic: string;
+}
+export const togglePublic = (isPublic: string): TogglePublicActionType => ({
+  type: TOGGLE_PUBLIC,
+  isPublic,
+});
 
 type GetStateType = () => AppStateType;
 type DispatchType = Dispatch<ActionsTypes>;
@@ -109,9 +125,13 @@ type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
 export const requestGetRecipes = (): ThunkType => {
   return async (dispatch, getState) => {
-    const { data } = await recipeAPI.getRecipes();
-    console.log(data);
-    dispatch(setRecipes(data));
+    if (getState().auth.isAuth) {
+      const { data } = await recipeAPI.getRecipes(getState().app.isPublic, getState().auth.userId);
+      dispatch(setRecipes(data));
+    } else {
+      const { data } = await recipeAPI.getRecipes(getState().app.isPublic);
+      dispatch(setRecipes(data));
+    }
   };
 };
 
@@ -123,13 +143,16 @@ export const requestGetRecipe = (id: string): ThunkType => {
 };
 export const requestAddRecipe = (recipe: Recipe): ThunkType => {
   return async (dispatch, getState) => {
-    await recipeAPI.addRecipe(recipe);
+    if (getState().auth.isAuth) {
+      const userId = getState().auth.userId;
+      await recipeAPI.addRecipe({ userId, recipe });
+    }
     requestGetRecipes();
   };
 };
-export const requestUpdateRecipe = (id: string, recipe: any): ThunkType => {
+export const requestUpdateRecipe = (recipe: any): ThunkType => {
   return async (dispatch, getState) => {
-    await recipeAPI.updateRecipe({ id, ...recipe });
+    await recipeAPI.updateRecipe(recipe);
     requestGetRecipes();
   };
 };
@@ -141,8 +164,14 @@ export const requestRemoveRecipe = (id: string): ThunkType => {
 };
 export const requestFilterRecipe = (ingredients: Array<string>): ThunkType => {
   return async (dispatch, getState) => {
-    const { data } = await recipeAPI.filter(ingredients);
-    dispatch(setRecipes(data));
+    if (getState().auth.isAuth) {
+      const userId = getState().auth.userId;
+      const { data } = await recipeAPI.filter(ingredients, userId);
+      dispatch(setRecipes(data));
+    } else {
+      const { data } = await recipeAPI.filter(ingredients);
+      dispatch(setRecipes(data));
+    }
   };
 };
 

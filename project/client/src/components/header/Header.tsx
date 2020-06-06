@@ -5,9 +5,11 @@ import { NavLink } from 'react-router-dom';
 const Header = ({
   requestFilterRecipe,
   withSearch,
+  isAuth,
 }: {
   requestFilterRecipe: (ingredients: Array<string>) => void;
   withSearch?: boolean;
+  isAuth: boolean;
 }) => {
   const [searchText, setSearchText] = useState('');
 
@@ -17,7 +19,7 @@ const Header = ({
 
   return (
     <header className={styles.header}>
-      <h1 style={{ marginLeft: '30px', marginRight: '30px' }}>Generator receptur</h1>
+      <h1 style={{ marginLeft: '30px', marginRight: '30px' }}>Generator for pidarow</h1>
       <div className="search-form">
         {withSearch && (
           <>
@@ -33,7 +35,7 @@ const Header = ({
           </>
         )}
 
-        {localStorage.getItem('accessToken') ? (
+        {isAuth ? (
           <>
             {withSearch ? (
               <NavLink style={{ marginLeft: '30px' }} to="/profile">

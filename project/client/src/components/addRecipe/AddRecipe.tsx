@@ -23,7 +23,7 @@ class AddRecipe extends React.Component<Props, IState> {
       isRedirect: false,
     };
   }
-  postData = ({ name, ingredients, timeForPreparing, description, rating, isPublic }: any) => {
+  postData = ({ name, ingredients, timeForPreparing, description, isPublic }: any) => {
     const _ingredients = ingredients.split(',');
     const _isPublic = isPublic.toUpperCase() === 'YES';
     this.props.requestAddRecipe({
@@ -31,8 +31,8 @@ class AddRecipe extends React.Component<Props, IState> {
       ingredients: _ingredients,
       timeForPreparing,
       description,
-      rating,
       isPublic: _isPublic,
+      likers: [''],
     });
     this.setState({ isRedirect: true });
   };
@@ -113,20 +113,7 @@ const FormRecipe = (props: any) => {
           />
         </Col>
       </Form.Group>
-      <Form.Group as={Row}>
-        <Form.Label column sm="4">
-          rating
-        </Form.Label>
-        <Col sm="7">
-          <Field
-            name="rating"
-            placeholder="np. 3.4"
-            validate={[required]}
-            component={InputText}
-            type="text"
-          />
-        </Col>
-      </Form.Group>
+      
       <Form.Group as={Row}>
         <Form.Label column sm="4">
           isPublic

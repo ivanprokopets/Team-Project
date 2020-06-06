@@ -8,7 +8,10 @@ import { Recipe } from '../../types/types';
 import { AppStateType } from '../../store';
 import Header from './Header';
 
-interface MapStatePropsType {}
+interface MapStatePropsType {
+  isAuth: boolean;
+  recipes: Array<Recipe>;
+}
 
 interface MapDispatchPropsType {
   requestFilterRecipe: (ingredients: Array<string>) => void;
@@ -25,6 +28,7 @@ class HeaderContainer extends React.Component<PropsType> {
     return (
       <>
         <Header
+          isAuth={this.props.isAuth}
           withSearch={this.props.withSearch}
           requestFilterRecipe={this.props.requestFilterRecipe}
         />
@@ -36,6 +40,7 @@ class HeaderContainer extends React.Component<PropsType> {
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
   return {
     recipes: getRecipes(state),
+    isAuth: state.auth.isAuth,
   };
 };
 
