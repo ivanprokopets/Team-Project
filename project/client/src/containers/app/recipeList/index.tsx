@@ -53,17 +53,23 @@ const RecipeList: FC<PropsType> = ({
             <span>{ingredient}, </span>
           ))}
         </div>
+
         <div>
           <b>description: </b> {recipe.description}
         </div>
-        {recipe.isPublic && checkUserId(recipe.likers) ? (
-          <button onClick={() => dislikeRecipe(recipe)}>dislike</button>
-        ) : (
-          <button onClick={() => likeRecipe(recipe)}>like</button>
-        )}
-        <div>
-          <b>likes</b>:{recipe.likers.length}
-        </div>
+        {recipe.isPublic &&
+          (checkUserId(recipe.likers) ? (
+            <>
+              <button onClick={() => dislikeRecipe(recipe)}>dislike</button>
+              <b>likes</b>:{recipe.likers.length}
+            </>
+          ) : (
+            <>
+              <button onClick={() => likeRecipe(recipe)}>like</button>
+              <b>likes</b>:{recipe.likers.length}
+            </>
+          ))}
+        <div></div>
       </div>
     );
   });
