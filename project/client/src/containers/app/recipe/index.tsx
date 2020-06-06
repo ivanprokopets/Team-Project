@@ -9,6 +9,7 @@ interface PropsType {
   isAuth: boolean;
   userId: string;
   recipe: Recipe;
+  requestGetRecipe: (recipeId: string) => void;
   requestUpdateRecipe: (recipe: Recipe) => void;
 }
 
@@ -17,6 +18,7 @@ const RecipeList: FC<PropsType> = ({
   recipe,
   togglePublic,
   requestGetRecipes,
+  requestGetRecipe,
   isAuth,
   userId,
   requestUpdateRecipe,
@@ -33,7 +35,7 @@ const RecipeList: FC<PropsType> = ({
       ...recipe,
       likers,
     });
-    requestGetRecipes();
+    requestGetRecipe(recipe._id);
   };
   const dislikeRecipe = (recipe: any) => {
     const likers = recipe.likers.filter((e: string) => e != userId);
@@ -42,7 +44,7 @@ const RecipeList: FC<PropsType> = ({
       ...recipe,
       likers,
     });
-    requestGetRecipes();
+    requestGetRecipe(recipe._id);
   };
 
   return (
