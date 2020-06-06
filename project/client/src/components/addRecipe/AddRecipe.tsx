@@ -31,8 +31,8 @@ class AddRecipe extends React.Component<Props, IState> {
       ingredients: _ingredients,
       timeForPreparing,
       description,
-      rating,
       isPublic: _isPublic,
+      likers: [''],
     });
     this.setState({ isRedirect: true });
   };

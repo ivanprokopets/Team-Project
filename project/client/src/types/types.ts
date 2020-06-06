@@ -4,14 +4,14 @@ export interface Recipe {
   ingredients: Array<string>;
   timeForPreparing: number;
   description: string;
-  rating: number;
-  isPublic:boolean;
+  isPublic: boolean;
+  likers: string[];
 }
 export interface Product {
   id: number;
   name: string;
   description: string;
-  type:string;
+  type: string;
 }
 
 export interface User {

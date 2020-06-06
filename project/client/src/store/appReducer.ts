@@ -4,7 +4,7 @@ import { AppStateType } from '.';
 import { Recipe, Product } from '../types/types';
 import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import jwt from 'jwt-decode';
+
 const SET_RECIPES = 'SET_RECIPES';
 const SET_RECIPE = 'SET_RECIPE';
 
@@ -18,7 +18,8 @@ const initialState = {
     ingredients: [''],
     timeForPreparing: 0,
     description: '',
-    rating: 0,
+
+    likers: [''],
   } as Recipe,
   recipes: [
     {
@@ -27,7 +28,8 @@ const initialState = {
       ingredients: [''],
       timeForPreparing: 0,
       description: '',
-      rating: 0,
+
+      likers: [''],
     },
   ] as Array<Recipe>,
   product: {} as Product,
@@ -123,11 +125,8 @@ type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
 export const requestGetRecipes = (): ThunkType => {
   return async (dispatch, getState) => {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      const { userId } = jwt(JSON.parse(token).value);
-      const { data } = await recipeAPI.getRecipes(getState().app.isPublic, userId);
-      console.log(data);
+    if (getState().auth.isAuth) {
+      const { data } = await recipeAPI.getRecipes(getState().app.isPublic, getState().auth.userId);
       dispatch(setRecipes(data));
     } else {
       const { data } = await recipeAPI.getRecipes(getState().app.isPublic);
@@ -144,18 +143,16 @@ export const requestGetRecipe = (id: string): ThunkType => {
 };
 export const requestAddRecipe = (recipe: Recipe): ThunkType => {
   return async (dispatch, getState) => {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      const { userId } = jwt(JSON.parse(token).value);
+    if (getState().auth.isAuth) {
+      const userId = getState().auth.userId;
       await recipeAPI.addRecipe({ userId, recipe });
     }
-
     requestGetRecipes();
   };
 };
-export const requestUpdateRecipe = (id: string, recipe: any): ThunkType => {
+export const requestUpdateRecipe = (recipe: any): ThunkType => {
   return async (dispatch, getState) => {
-    await recipeAPI.updateRecipe({ id, ...recipe });
+    await recipeAPI.updateRecipe(recipe);
     requestGetRecipes();
   };
 };
@@ -167,9 +164,8 @@ export const requestRemoveRecipe = (id: string): ThunkType => {
 };
 export const requestFilterRecipe = (ingredients: Array<string>): ThunkType => {
   return async (dispatch, getState) => {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      const { userId } = jwt(JSON.parse(token).value);
+    if (getState().auth.isAuth) {
+      const userId = getState().auth.userId;
       const { data } = await recipeAPI.filter(ingredients, userId);
       dispatch(setRecipes(data));
     } else {

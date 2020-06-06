@@ -5,9 +5,11 @@ import { NavLink } from 'react-router-dom';
 const Header = ({
   requestFilterRecipe,
   withSearch,
+  isAuth,
 }: {
   requestFilterRecipe: (ingredients: Array<string>) => void;
   withSearch?: boolean;
+  isAuth: boolean;
 }) => {
   const [searchText, setSearchText] = useState('');
 
@@ -33,7 +35,7 @@ const Header = ({
           </>
         )}
 
-        {localStorage.getItem('accessToken') ? (
+        {isAuth ? (
           <>
             {withSearch ? (
               <NavLink style={{ marginLeft: '30px' }} to="/profile">
