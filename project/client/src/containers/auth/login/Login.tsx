@@ -38,9 +38,9 @@ class Login extends React.Component<Props,IState> {
           <div>
             <div className={s.title}>L O G I N</div>
             <LoginFormRedux onSubmit={this.postData} />
-            <NavLink  className={s.buttonRegister} to="/register">
-                    register
-                  </NavLink>
+            <NavLink  className={s.registerButton} to="/register">
+              Register
+            </NavLink>
           </div>
         </div>
       </>

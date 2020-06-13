@@ -45,7 +45,7 @@ const Header = ({
   };
   return (
     <header className={styles.header}>
-      <h1 style={{ marginLeft: '30px', marginRight: '30px' }}>Generator for pidarow</h1>
+      <h1 style={{ marginLeft: '30px', marginRight: '30px' }}>Generator przepisów</h1>
       <div style={{ flexDirection: 'row', display: 'inlineBlock' }}>
         {products.map((product: any) => (
           <span
