@@ -5,54 +5,87 @@ const Product = mongoose.model('Product');
 const getAll = (req, res) => {
   Product.find()
     .exec()
-    .then(products => {
+    .then((products) => {
       res.json(products);
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json(err);
     });
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
-};
-
-const getProduct=(req,res)=> {
-  Product.findOne({_id:req.params.id})
-  .exec()
-  .then(product=> {res.json(product)})
-  .catch(err=> {
-      res.status(500).json(err);
-  });
   res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
-}
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, Content-Length, X-Requested-With, Accept',
+  );
+};
+const filter = (req, res) => {
+  Product.find()
+    .exec()
+    .then((products) => {
+      const searchProductLength = req.query.product.length;
+      const filteredProducts = products.filter(
+        (product) => product.name.slice(0, searchProductLength) === req.query.product,
+      );
+      res.json(filteredProducts);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, Content-Length, X-Requested-With, Accept',
+  );
+};
+const getProduct = (req, res) => {
+  Product.findOne({ _id: req.params.id })
+    .exec()
+    .then((product) => {
+      res.json(product);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, Content-Length, X-Requested-With, Accept',
+  );
+};
 
 const create = (req, res) => {
   Product.create(req.body)
-    .then(createdProduct => {
+    .then((createdProduct) => {
       res.json(createdProduct);
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json(err);
     });
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, Content-Length, X-Requested-With, Accept',
+  );
 };
 
 const update = (req, res) => {
   Product.findOneAndUpdate({ _id: req.params.id }, req.body)
     .exec()
-    .then(product => {
+    .then((product) => {
       res.json(product);
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json(err);
     });
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, Content-Length, X-Requested-With, Accept',
+  );
 };
 
 const remove = (req, res) => {
@@ -60,12 +93,15 @@ const remove = (req, res) => {
     .then(() => {
       res.json({ success: true });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json(err);
     });
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, Content-Length, X-Requested-With, Accept',
+  );
 };
 
 module.exports = {
@@ -74,4 +110,5 @@ module.exports = {
   create,
   update,
   remove,
+  filter,
 };
