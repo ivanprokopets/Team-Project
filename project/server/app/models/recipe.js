@@ -6,7 +6,9 @@ const RecipeSchema = new mongoose.Schema({
     description:String,
     ingredients: Array,
     isPublic:Boolean,
-    rating:Number
+    rating:Number,
+    creatorId:String,
+    likers:Array
 })
 
 mongoose.model('Recipe',RecipeSchema );
