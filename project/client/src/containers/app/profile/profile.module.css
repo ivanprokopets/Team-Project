@@ -1,0 +1,21 @@
+.buttonAddRecipe {
+  justify-self: center;
+  background-color: rgb(105, 99, 99, 0.2);
+  color: rgba(37, 15, 15, 0.801);
+  border: 2px solid rgba(37, 15, 15, 0.801);
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 15px 0px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.buttonAddRecipe:hover {
+  background-color: #CEE5D7;
+  border: 2px solid rgba(37, 15, 15, 0.801);
+}

@@ -56,11 +56,11 @@ const RecipeList: FC<PropsType> = ({
         <div className={s.recipeCard} onClick={() => onRecipe(recipe._id)}>
           <img
             src={require('../../../images/food_default.png')}
-            style={{ width: 250, height: 250, margin: 10 }}
+            style={{ width: 250, height: 250 }}
           />
           <div className={s.recipeDetails}>
-            <div>
-              <b>Nazwa:</b> {recipe.name}
+            <div className={s.recipeName}>
+              {recipe.name}
             </div>
             <div>
               <b>Ingredienty:</b>{' '}
@@ -69,8 +69,12 @@ const RecipeList: FC<PropsType> = ({
               ))}
             </div>
             <div>
-              <b>Sposób przygotowania:</b>{' '}
+              <b>Sposób przygotowania:</b>
               {recipe.description}
+            </div>
+            <div>
+              <b>Czas przygotowania:</b>
+              {recipe.timeForPreparing}
             </div>
           </div>
         </div>

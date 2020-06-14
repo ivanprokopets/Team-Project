@@ -58,6 +58,10 @@
 }
 
 .recipeDetails {
-  margin: 30px 40px;
+  margin: 15px 40px;
   text-align: left;
+}
+
+.recipeName {
+  font-size: 2rem;
 }

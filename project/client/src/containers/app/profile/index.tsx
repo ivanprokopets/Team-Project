@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Recipe, User } from '../../../types/types';
 import { NavLink } from 'react-router-dom';
+import s from './profile.module.css';
 
 interface PropsType {
   user: User;
@@ -11,12 +12,14 @@ const Profile: FC<PropsType> = ({ user }) => {
     <>
       <div style={{ margin: '30px' }}>
         <div>
-          <b>name:</b> {user.name}
+          <b>Name:</b> {user.name}
         </div>
         <div>
-          <b>email:</b> {user.email}
+          <b>Email:</b> {user.email}
         </div>
-        <NavLink to="/addRecipe">add recipe</NavLink>
+        <NavLink to="/addRecipe">
+          <button className={s.buttonAddRecipe}>Dodaj swój przepis!</button>
+        </NavLink>
       </div>
     </>
   );
