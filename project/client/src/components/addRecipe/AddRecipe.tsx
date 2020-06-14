@@ -135,7 +135,7 @@ const FormRecipe = (props: any) => {
           onClick={props.reset}>
           Clear
         </button>
-        <button className={s.buttonRegister}>add recipe</button>
+        <button className={s.buttonRegister}>Add recipe</button>
       </div>
     </Form>
   );

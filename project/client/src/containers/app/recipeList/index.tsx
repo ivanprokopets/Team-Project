@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import { Recipe } from '../../../types/types';
 import { required } from '../../../utils/validation';
 import { Redirect } from 'react-router-dom';
+import s from './recipeList.module.css';
 
 interface PropsType {
   recipes: Array<Recipe>;
@@ -51,31 +52,37 @@ const RecipeList: FC<PropsType> = ({
   };
   const elementRecipe = recipes.map((recipe: any) => {
     return (
-      <div style={{ margin: '30px' }}>
-        <div onClick={() => onRecipe(recipe._id)}>
-          <div>
-            <b>name:</b> {recipe.name}
-          </div>
+      <div className={s.recipeCardWrapper}>
+        <div className={s.recipeCard} onClick={() => onRecipe(recipe._id)}>
           <img
             src={require('../../../images/food_default.png')}
-            style={{ width: 200, height: 200 }}
+            style={{ width: 250, height: 250, margin: 10 }}
           />
-          <div>
-            <b>ingredients:</b>{' '}
-            {recipe.ingredients.map((ingredient: any) => (
-              <span>{ingredient}, </span>
-            ))}
+          <div className={s.recipeDetails}>
+            <div>
+              <b>Nazwa:</b> {recipe.name}
+            </div>
+            <div>
+              <b>Ingredienty:</b>{' '}
+              {recipe.ingredients.map((ingredient: any) => (
+                <span>{ingredient}, </span>
+              ))}
+            </div>
+            <div>
+              <b>Sposób przygotowania:</b>{' '}
+              {recipe.description}
+            </div>
           </div>
         </div>
 
         {recipe.isPublic && (
           <>
-            <b>likes</b>:{recipe.likers.length}
+            <b>Likes</b>:{recipe.likers.length}
             {isAuth &&
               (checkUserId(recipe.likers) ? (
-                <button onClick={() => dislikeRecipe(recipe)}>dislike</button>
+                <button className={s.publicityDislike} onClick={() => dislikeRecipe(recipe)}>Dislike</button>
               ) : (
-                <button onClick={() => likeRecipe(recipe)}>like</button>
+                <button className={s.publicityLike} onClick={() => likeRecipe(recipe)}>Like</button>
               ))}
           </>
         )}
@@ -100,13 +107,13 @@ const RecipeList: FC<PropsType> = ({
   return (
     <>
       {isAuth && (
-        <div>
-          <button onClick={onAll}>all</button>
-          <button onClick={onPublic}>public</button>
-          <button onClick={onPrivate}>private</button>
+        <div className={s.statusText}>
+          Status:
+          <button className={s.publicity} onClick={onAll}>Wszystkie</button>
+          <button className={s.publicity} onClick={onPublic}>Publiczne</button>
+          <button className={s.publicity} onClick={onPrivate}>Prywatne</button>
         </div>
       )}
-
       <div>{elementRecipe}</div>
     </>
   );
