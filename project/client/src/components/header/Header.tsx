@@ -45,7 +45,9 @@ const Header = ({
   };
   return (
     <header className={styles.header}>
-      <h1 style={{ marginLeft: '30px', marginRight: '30px' }}>Generator przepisów</h1>
+      <NavLink to="/" className={styles.headerHomeButton}>
+        <h1 style={{ marginLeft: '30px', marginRight: '30px' }}>Generator przepisów</h1>
+      </NavLink>
       <div style={{ flexDirection: 'row', display: 'inlineBlock' }}>
         {products.map((product: any) => (
           <span
@@ -64,7 +66,6 @@ const Header = ({
                 return product ? (
                   <span className={styles.product}>
                     {product}
-
                     <span
                       style={{ color: 'red' }}
                       onClick={() => {
@@ -81,10 +82,11 @@ const Header = ({
             <input
               className={styles.searchInput}
               type="text"
+              placeholder="Wyszukaj po produktach.."
               value={productSearch}
               onChange={(event) => setProductSearch(event.target.value)}
             />
-            <button className="search-button" onClick={onSearchSubmit}>
+            <button className={styles.searchButton} onClick={onSearchSubmit}>
               Search
             </button>
           </>
@@ -93,31 +95,32 @@ const Header = ({
         {isAuth ? (
           <>
             {withSearch ? (
-              <NavLink style={{ marginLeft: '30px' }} to="/profile">
-                profile
+              <NavLink className={styles.headerButton} style={{ marginLeft: '30px' }} to="/profile">
+                Profile
               </NavLink>
             ) : (
-              <NavLink style={{ marginLeft: '30px' }} to="/">
-                recipes
+              <NavLink className={styles.headerButton} style={{ marginLeft: '30px' }} to="/">
+                Recipes
               </NavLink>
             )}
 
             <NavLink
+              className={styles.headerButton}
               onClick={() => {
                 localStorage.removeItem('accessToken');
               }}
               style={{ marginLeft: '30px', marginRight: '30px' }}
               to="/">
-              logout
+              Logout
             </NavLink>
           </>
         ) : (
           <>
-            <NavLink style={{ marginLeft: '30px' }} to="/login">
-              login
+            <NavLink className={styles.headerButton} style={{ marginLeft: '30px' }} to="/login">
+              Login
             </NavLink>
-            <NavLink style={{ marginLeft: '30px', marginRight: '30px' }} to="/register">
-              register
+            <NavLink className={styles.headerButton} style={{ marginLeft: '30px', marginRight: '30px' }} to="/register">
+              Register
             </NavLink>
           </>
         )}

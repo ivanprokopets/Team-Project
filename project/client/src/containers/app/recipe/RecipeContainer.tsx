@@ -44,6 +44,7 @@ class RecipeContainer extends React.Component<PropsType> {
   render() {
     return (
       <>
+        <HeaderContainer />
         <RecipeComponent {...this.props} />
       </>
     );

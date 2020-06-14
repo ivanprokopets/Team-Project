@@ -1,0 +1,55 @@
+.recipeOneCard {
+  padding: 15px 5px;
+  margin: 20px 170px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+  transition-duration: 0.5s;
+  display: flex;
+}
+
+.recipeDescriptions {
+  text-align: left;
+}
+
+.recipeName {
+  font-size: 3rem;
+  margin-bottom: 15px 0px;
+}
+
+.backToListButton {
+  color: black;
+  text-decoration: none;
+}
+
+.backToListButton:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.backToListButton:visited {
+  color: black;
+  text-decoration: none;
+}
+
+.buttonRegister {
+  justify-self: center;
+  background-color: rgb(105, 99, 99, 0.2);
+  color: rgba(37, 15, 15, 0.801);
+  border: 2px solid rgba(37, 15, 15, 0.801);
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 15px 0px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.buttonRegister:hover {
+  background-color: #CEE5D7;
+  border: 2px solid rgba(37, 15, 15, 0.801);
+}

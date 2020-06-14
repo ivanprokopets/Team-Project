@@ -36,12 +36,10 @@ class Register extends React.Component<Props> {
           <div >
             <div className={s.title}>Register</div>
             <RegisterFormRedux onSubmit={this.postData} />
-            <NavLink  className={s.buttonRegister} to="/login">
-                    login
-                  </NavLink>
-          
+            <NavLink  className={s.loginButton} to="/login">
+              Login
+            </NavLink>
           </div>
-         
         </div>
       </>
     );
@@ -53,7 +51,7 @@ const FormRegister = (props:any) => {
     <Form className={s.formRegister} onSubmit={props.handleSubmit}>
         <Form.Group as={Row} controlId="formBasicEmail">
         <Form.Label column sm="4">
-          name
+          Name
         </Form.Label>
         <Col sm="7">
           <Field
@@ -67,7 +65,7 @@ const FormRegister = (props:any) => {
       </Form.Group>
       <Form.Group as={Row} controlId="formBasicEmail">
         <Form.Label column sm="4">
-          email
+          Email
         </Form.Label>
         <Col sm="7">
           <Field
@@ -99,7 +97,7 @@ const FormRegister = (props:any) => {
           onClick={props.reset}>
           Clear
         </button>
-        <button className={s.buttonRegister}>register</button>
+        <button className={s.buttonRegister}>Register</button>
       </div>
     </Form>
   );

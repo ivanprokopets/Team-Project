@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { Recipe } from '../../../types/types';
 import { required } from '../../../utils/validation';
+import s from './Recipe.module.css';
+import { NavLink } from 'react-router-dom';
 
 interface PropsType {
   recipes: Array<Recipe>;
@@ -48,28 +50,43 @@ const RecipeList: FC<PropsType> = ({
   };
 
   return (
-    <div style={{ margin: '30px' }}>
-      <div>
-        <b>name:</b> {recipe.name}
+    <div className={s.recipeOneCard} style={{ margin: '30px' }}>
+      <img src={require('../../../images/food_default.png')} style={{ width: 400, height: 400 }} />
+      <div className={s.recipeDescriptions}>
+        <div className={s.recipeName}>
+          {recipe.name}
+        </div>
+        <div>
+          <b>Ingredienty:</b>{' '}
+          {recipe.ingredients.map((ingredient) => (
+            <span>{ingredient}, </span>
+          ))}
+        </div>
+        <div>
+          <b>Czas Przygotowania: </b>{recipe.timeForPreparing}
+        </div>
+        <div>
+          <b>Przepis: </b>{recipe.description}
+        </div>
+        {recipe.isPublic && (
+          <>
+            <b>Polubienia</b>:{recipe.likers.length}
+            {isAuth &&
+              (checkUserId(recipe.likers) ? (
+                <button onClick={() => dislikeRecipe(recipe)}>dislike</button>
+              ) : (
+                <button onClick={() => likeRecipe(recipe)}>like</button>
+              ))}
+          </>
+        )}
+        <div>
+          <NavLink className={s.backToListButton} to="/">
+            <button className={s.buttonRegister}>
+              Wróć do listy przepisów
+            </button>
+          </NavLink>
+        </div>
       </div>
-      <img src={require('../../../images/food_default.png')} style={{ width: 200, height: 200 }} />
-      <div>
-        <b>ingredients:</b>{' '}
-        {recipe.ingredients.map((ingredient) => (
-          <span>{ingredient}, </span>
-        ))}
-      </div>
-      {recipe.isPublic && (
-        <>
-          <b>likes</b>:{recipe.likers.length}
-          {isAuth &&
-            (checkUserId(recipe.likers) ? (
-              <button onClick={() => dislikeRecipe(recipe)}>dislike</button>
-            ) : (
-              <button onClick={() => likeRecipe(recipe)}>like</button>
-            ))}
-        </>
-      )}
     </div>
   );
 };

@@ -10,7 +10,7 @@
 .backgroundRegister {
   height: '100%';
   display: flex;
-  background-color: white;
+  background-color: #EBF4EE;
   width: 100vw;
   justify-content: center;
   align-items: center;
@@ -24,7 +24,7 @@
   padding: 15px;
   margin: 0 auto;
   border-radius: 0.3em;
-  background-color: #f2f2f2;
+  background-color: white;
   border: 2px solid gray;
 }
 .githubLogin {
@@ -102,8 +102,28 @@
 }
 
 .buttonRegister:hover {
-  background-color: rgba(37, 15, 15, 0.801);
-  color: white;
+  background-color: #CEE5D7;
+  border: 2px solid rgba(37, 15, 15, 0.801);
+}
+
+.loginButton {
+  justify-self: center;
+  color: rgba(37, 15, 15, 0.801);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.loginButton:hover {
+  color: rgba(37, 15, 15, 0.801);
+  text-decoration: underline;
 }
 
 .formButton {
