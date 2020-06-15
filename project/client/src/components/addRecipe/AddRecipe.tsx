@@ -8,6 +8,7 @@ import {InputText, TextArea,InputPicker} from '../../common/formsControls';
 import {required} from '../../utils/validation';
 import {Redirect} from 'react-router-dom';
 import {Recipe} from '../../types/types';
+import { NavLink } from 'react-router-dom';
 
 interface Props {
     requestAddRecipe: (recipe : Recipe) => void;
@@ -55,7 +56,7 @@ IState > {
                     <div>
                         <div className={
                             s.title
-                        }>Add recipe</div>
+                        }>Dodanie przepisu</div>
                         <RecipeFormRedux onSubmit={
                             this.postData
                         }
@@ -78,10 +79,10 @@ const FormRecipe = (props : any) => {
         }>
             <Form.Group as={Row}>
                 <Form.Label column sm="4">
-                    Name
+                    Nazwa
                 </Form.Label>
                 <Col sm="7">
-                    <Field name="name" placeholder="Name"
+                    <Field name="name" placeholder="Nazwa"
                         validate={
                             [required]
                         }
@@ -91,12 +92,12 @@ const FormRecipe = (props : any) => {
             </Form.Group>
              <Form.Group as={Row}>
         <Form.Label column sm="4">
-          ingredients
+          Ingredienty
         </Form.Label>
         <Col sm="7">
           <Field
             name="ingredients"
-            placeholder="Egg,milk"
+            placeholder="Egg,milk.."
             validate={[required]}
             component={InputText}
             type="text"
@@ -107,7 +108,7 @@ const FormRecipe = (props : any) => {
         
             <Form.Group as={Row}>
                 <Form.Label column sm="4">
-                    timeForPreparing
+                    Czas przygotowania
                 </Form.Label>
                 <Col sm="7">
                     <Field name="timeForPreparing" placeholder="TimeForPreparing"
@@ -120,7 +121,7 @@ const FormRecipe = (props : any) => {
             </Form.Group>
             <Form.Group as={Row}>
                 <Form.Label column sm="4">
-                    description
+                    Przepis
                 </Form.Label>
                 <Col sm="7">
                     <Field name="description" placeholder="Firstly... "
@@ -134,7 +135,7 @@ const FormRecipe = (props : any) => {
 
             <Form.Group as={Row}>
                 <Form.Label column sm="4">
-                    isPublic
+                    Publicznosć
                 </Form.Label>
                 <Col sm="7">
                     <Field name="isPublic" placeholder="yes or no"
@@ -157,11 +158,16 @@ const FormRecipe = (props : any) => {
                     onClick={
                         props.reset
                 }>
-                    Clear
+                    Usuń
                 </button>
+                <NavLink to="/" >
+                  <button className={s.buttonRegister}>
+                    Wróć
+                  </button>
+                </NavLink>
                 <button className={
                     s.buttonRegister
-                }>Add recipe</button>
+                }>Dodaj przepis</button>
             </div>
         </Form>
     );

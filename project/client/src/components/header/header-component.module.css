@@ -47,12 +47,14 @@
 }
 
 .product {
-  padding: 3px 4px;
-  margin: 8px 0;
+  padding: 5px 5px;
+  margin-right: 5px;
+  font-size: 1rem;
   box-sizing: border-box;
   border: none;
+  border-radius: 5px;
   background-color: white;
-  border-bottom: 2px solid red;
+  border-bottom: 2px solid black;
 }
 
 .headerButton {

@@ -112,7 +112,6 @@ const RecipeList: FC<PropsType> = ({
     <>
       {isAuth && (
         <div className={s.statusText}>
-          Status:
           <button className={s.publicity} onClick={onAll}>Wszystkie</button>
           <button className={s.publicity} onClick={onPublic}>Publiczne</button>
           <button className={s.publicity} onClick={onPrivate}>Prywatne</button>

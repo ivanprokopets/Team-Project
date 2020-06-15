@@ -65,7 +65,7 @@ const Header = ({
                   <span className={styles.product}>
                     {product}
                     <span
-                      style={{ color: 'red' }}
+                      style={{ color: 'black' }}
                       onClick={() => {
                         removeProduct(product);
                       }}>
