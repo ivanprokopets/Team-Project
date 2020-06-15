@@ -3,74 +3,93 @@ import s from './addRecipe.module.css';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Field, reduxForm } from 'redux-form';
-import { InputText, TextArea } from '../../common/formsControls';
-import { required } from '../../utils/validation';
-import { Redirect } from 'react-router-dom';
-import { Recipe } from '../../types/types';
+import {Field, reduxForm} from 'redux-form';
+import {InputText, TextArea,InputPicker} from '../../common/formsControls';
+import {required} from '../../utils/validation';
+import {Redirect} from 'react-router-dom';
+import {Recipe} from '../../types/types';
 
 interface Props {
-  requestAddRecipe: (recipe: Recipe) => void;
+    requestAddRecipe: (recipe : Recipe) => void;
 }
 interface IState {
-  isRedirect: boolean;
+    isRedirect: boolean;
 }
-class AddRecipe extends React.Component<Props, IState> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      isRedirect: false,
-    };
-  }
-  postData = ({ name, ingredients, timeForPreparing, description, isPublic }: any) => {
-    const _ingredients = ingredients.split(',');
-    const _isPublic = isPublic.toUpperCase() === 'YES';
-    this.props.requestAddRecipe({
-      name,
-      ingredients: _ingredients,
-      timeForPreparing,
-      description,
-      isPublic: _isPublic,
-      likers: [''],
-    });
-    this.setState({ isRedirect: true });
-  };
-
-  render() {
-    if (this.state.isRedirect) {
-      return <Redirect to="/" />;
+class AddRecipe extends React.Component < Props,
+IState > {
+    constructor(props : Props) {
+        super(props);
+        this.state = {
+            isRedirect: false
+        };
     }
-    return (
-      <>
-        <div className={s.backgroundRegister}>
-          <div>
-            <div className={s.title}>Add recipe</div>
-            <RecipeFormRedux onSubmit={this.postData} />
-          </div>
-        </div>
-      </>
-    );
-  }
+    postData = ({
+        name,
+        ingredients,
+        timeForPreparing,
+        description,
+        isPublic
+    } : any) => {
+        const _ingredients = ingredients.split(',');
+        const _isPublic = isPublic.toUpperCase() === 'YES';
+        this.props.requestAddRecipe({
+            name,
+            ingredients: _ingredients,
+            timeForPreparing,
+            description,
+            isPublic: _isPublic,
+            likers: ['']
+        });
+        this.setState({isRedirect: true});
+    };
+
+    render() {
+        if (this.state.isRedirect) {
+            return <Redirect to="/"/>;
+        }
+        return (
+            <>
+                <div className={
+                    s.backgroundRegister
+                }>
+                    <div>
+                        <div className={
+                            s.title
+                        }>Add recipe</div>
+                        <RecipeFormRedux onSubmit={
+                            this.postData
+                        }
+                      />
+                    </div>
+                </div>
+            </>
+        );
+    }
 }
 
-const FormRecipe = (props: any) => {
-  return (
-    <Form className={s.formRegister} onSubmit={props.handleSubmit}>
-      <Form.Group as={Row}>
-        <Form.Label column sm="4">
-          Name
-        </Form.Label>
-        <Col sm="7">
-          <Field
-            name="name"
-            placeholder="Name"
-            validate={[required]}
-            component={InputText}
-            type="text"
-          />
-        </Col>
-      </Form.Group>
-      <Form.Group as={Row}>
+const FormRecipe = (props : any) => {
+
+    return (
+        <Form className={
+                s.formRegister
+            }
+            onSubmit={
+                props.handleSubmit
+        }>
+            <Form.Group as={Row}>
+                <Form.Label column sm="4">
+                    Name
+                </Form.Label>
+                <Col sm="7">
+                    <Field name="name" placeholder="Name"
+                        validate={
+                            [required]
+                        }
+                        component={InputText}
+                        type="text"/>
+                </Col>
+            </Form.Group>
+             <Form.Group as={Row}>
         <Form.Label column sm="4">
           ingredients
         </Form.Label>
@@ -83,63 +102,69 @@ const FormRecipe = (props: any) => {
             type="text"
           />
         </Col>
-      </Form.Group>
+      </Form.Group> 
+     
+        
+            <Form.Group as={Row}>
+                <Form.Label column sm="4">
+                    timeForPreparing
+                </Form.Label>
+                <Col sm="7">
+                    <Field name="timeForPreparing" placeholder="TimeForPreparing"
+                        validate={
+                            [required]
+                        }
+                        component={InputText}
+                        type="text"/>
+                </Col>
+            </Form.Group>
+            <Form.Group as={Row}>
+                <Form.Label column sm="4">
+                    description
+                </Form.Label>
+                <Col sm="7">
+                    <Field name="description" placeholder="Firstly... "
+                        validate={
+                            [required]
+                        }
+                        component={TextArea}
+                        type="text"/>
+                </Col>
+            </Form.Group>
 
-      <Form.Group as={Row}>
-        <Form.Label column sm="4">
-          timeForPreparing
-        </Form.Label>
-        <Col sm="7">
-          <Field
-            name="timeForPreparing"
-            placeholder="TimeForPreparing"
-            validate={[required]}
-            component={InputText}
-            type="text"
-          />
-        </Col>
-      </Form.Group>
-      <Form.Group as={Row}>
-        <Form.Label column sm="4">
-          description
-        </Form.Label>
-        <Col sm="7">
-          <Field
-            name="description"
-            placeholder="Firstly... "
-            validate={[required]}
-            component={TextArea}
-            type="text"
-          />
-        </Col>
-      </Form.Group>
-
-      <Form.Group as={Row}>
-        <Form.Label column sm="4">
-          isPublic
-        </Form.Label>
-        <Col sm="7">
-          <Field
-            name="isPublic"
-            placeholder="yes or no"
-            validate={[required]}
-            component={InputText}
-            type="text"
-          />
-        </Col>
-      </Form.Group>
-      <div className={s.formButton}>
-        <button
-          className={s.buttonRegister}
-          disabled={props.pristine || props.submitting}
-          onClick={props.reset}>
-          Clear
-        </button>
-        <button className={s.buttonRegister}>Add recipe</button>
-      </div>
-    </Form>
-  );
+            <Form.Group as={Row}>
+                <Form.Label column sm="4">
+                    isPublic
+                </Form.Label>
+                <Col sm="7">
+                    <Field name="isPublic" placeholder="yes or no"
+                        validate={
+                            [required]
+                        }
+                        component={InputText}
+                        type="text"/>
+                </Col>
+            </Form.Group>
+            <div className={
+                s.formButton
+            }>
+                <button className={
+                        s.buttonRegister
+                    }
+                    disabled={
+                        props.pristine || props.submitting
+                    }
+                    onClick={
+                        props.reset
+                }>
+                    Clear
+                </button>
+                <button className={
+                    s.buttonRegister
+                }>Add recipe</button>
+            </div>
+        </Form>
+    );
 };
-
-const RecipeFormRedux = reduxForm({ form: 'FormRecipe' })(FormRecipe);
+const RecipeFormRedux = reduxForm({form: 'FormRecipe'})(FormRecipe);
 export default AddRecipe;

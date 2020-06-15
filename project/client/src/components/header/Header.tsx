@@ -31,11 +31,9 @@ const Header = ({
     requestGetRecipes(searchArray.slice(1));
   };
   const selectProduct = (name: string) => {
-    setSearchArray([...searchArray, name]);
-    console.log(products);
-    const productsFilter = products.filter((e: any) => e.name != name);
-    console.log(productsFilter);
-    setProducts(productsFilter);
+    if(!searchArray.includes(name)) {
+      setSearchArray([...searchArray, name]);
+    }
     setProductSearch('');
   };
   const removeProduct = (product: string) => {
